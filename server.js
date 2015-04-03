@@ -36,7 +36,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '/')));
+//app.use(express.static(path.join(__dirname, '/')));
 
 // Didn't seem to be working at the time.
 app.use(function(req, res, next) {
@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/raw', express.static(path.join(__dirname, '/stories'));
+app.use(express.static(path.join(__dirname, '/stories'));
 
 app.use('/index', routes);
 app.use('/users', users);
