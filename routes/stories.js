@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 
 /* GET home page. */
@@ -15,7 +16,7 @@ router.get('/troll', function(req, res, next) {
 });
 
 router.get('/atightspot.z8', function(req, res, next) {
-    res.sendFile('atightspot.z8', { root: './stories' });
+    res.sendFile('atightspot.z8', { root: path.join(__dirname, '/stories') });
 });
 
 module.exports = router;
