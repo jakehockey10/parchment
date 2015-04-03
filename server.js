@@ -37,6 +37,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/')));
 
+// Didn't seem to be working at the time.
+app.use(function(req, res, next) {
+    var herokuKey = btoa(':' + process.env.AUTH_TOKEN + '\n');
+    req.header('Accept', 'application/vnd.heroku+json; version=3');
+    req.header('Authorization', herokuKey);
+    next();
+});
+
 app.use('/index', routes);
 app.use('/users', users);
 
@@ -79,14 +87,6 @@ module.exports = app;
 //
 //app.use( express.compress() );
 //app.use( express.static( __dirname + '/../' ) );
-
-// Didn't seem to be working at the time.
-//app.use(function(req, res, next) {
-//    var herokuKey = btoa(':' + process.env.AUTH_TOKEN + '\n');
-//    req.header('Accept', 'application/vnd.heroku+json; version=3');
-//    req.header('Authorization', herokuKey);
-//    next();
-//});
 
 //app.get('/stories', function (req, res) {
 //    res.send('stories');
