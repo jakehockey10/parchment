@@ -22,6 +22,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var stories = require('./routes/stories');
 
 var app = express();
 
@@ -39,7 +40,7 @@ app.use(express.static(path.join(__dirname, '/')));
 
 // Didn't seem to be working at the time.
 app.use(function(req, res, next) {
-    var herokuKey = btoa(':' + process.env.AUTH_TOKEN + '\n');
+    var herokuKey = new Buffer(':' + process.env.AUTH_TOKEN + '\n').toString('base64');
     req.header('Accept', 'application/vnd.heroku+json; version=3');
     req.header('Authorization', herokuKey);
     next();
@@ -47,10 +48,7 @@ app.use(function(req, res, next) {
 
 app.use('/index', routes);
 app.use('/users', users);
-
-app.get('/stories', function (req, res) {
-    res.send('stories');
-});
+app.use('/stories', stories);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
