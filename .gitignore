@@ -2,3 +2,4 @@
 *~
 *.z*
 node_modules
+.idea

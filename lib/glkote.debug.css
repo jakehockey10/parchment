@@ -3,14 +3,14 @@
 GlkOte
 ======
 
-Built: 2013-04-04
+Built: 2015-04-03
 
 GlkOte -- a Javascript display library for IF interfaces
 Dialog -- a Javascript load/save library for IF interfaces
 GlkAPI -- a Javascript Glk API for IF interfaces
 
 Designed by Andrew Plotkin <erkyrath@eblong.com>
-Copyright (c) 2008-2013 Andrew Plotkin
+Copyright (c) 2008-2015 Andrew Plotkin
 <http://eblong.com/zarf/glk/glkote.html>
 
 */
