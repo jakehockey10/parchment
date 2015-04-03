@@ -15,7 +15,7 @@ router.get('/troll', function(req, res, next) {
 });
 
 router.get('/atightspot.z8', function(req, res, next) {
-    res.sendFile('stories/atightspot.z8', { root: '.' });
+    res.sendFile('atightspot.z8', { root: './stories' });
 });
 
 module.exports = router;
