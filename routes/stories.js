@@ -14,9 +14,13 @@ router.get('/curses', function(req, res, next) {
 router.get('/troll', function(req, res, next) {
     res.redirect('/?story=stories/troll.z5');
 });
-//
-//router.get('/atightspot.z8', function(req, res, next) {
-//    res.sendFile('atightspot.z8', { root: path.join(__dirname, 'stories') });
-//});
+
+router.get('/atightspot', function(req, res, next) {
+    res.redirect('/?story=stories/atightspot.z8');
+});
+
+router.get('/anchor', function(req, res, next) {
+    res.redirect('/?story=stories/anchor.z8');
+});
 
 module.exports = router;

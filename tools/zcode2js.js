@@ -1,17 +1,52 @@
 function _onFileUpload() {
   if ($("#file-upload").get(0).files) {
-    var data = $("#file-upload").get(0).files[0].getAsBinary();
-    var storyBytes = [];
-    for (var i = 0; i < data.length; i++)
-      storyBytes.push(String.charCodeAt(data[i]));
-    var storyString = ("data:text/javascript,processBase64Zcode('" +
-                       file.base64_encode(storyBytes) +
-                       "');");
-    $("#js-file-download").attr("href", storyString);
-    $("#post-file-upload").fadeIn();
+    //var data = $("#file-upload").get(0).files[0].getAsBinary();
+    var file = $("#file-upload").get(0).files[0];
+    var reader = new FileReader(),
+        progressNode = document.getElementById("my-progress");
+
+    reader.onprogress = function(event) {
+      if (event.lengthComputable) {
+        progressNode.max = event.total;
+        progressNode.value = event.loaded;
+      }
+    };
+
+    reader.onloadend = function(event) {
+      var contents = event.target.result,
+          error    = event.target.error;
+
+      if (error != null) {
+        console.error("File could not be read! Code " + error.code);
+      } else {
+        progressNode.max = 1;
+        progressNode.value = 1;
+        console.log("Contents: " + contents);
+      }
+
+      var storyBytes = [];
+      for (var i = 0; i < event.target.result.length; i++) {
+        storyBytes.push(event.target.result.charCodeAt(i));
+      }
+      var encode2 = encode(storyBytes);
+      var storyString = ("data:text/javascript,processBase64Zcode('" + encode2 + "');");
+      $("#js-file-download").attr("href", storyString);
+      $("#post-file-upload").fadeIn();
+    };
+
+    reader.readAsBinaryString(file);
   } else {
     $("#post-file-upload-failed").fadeIn();
   }
+}
+
+function encode(data)
+{
+  var str = "";
+  for (var i = 0; i < data.length; i++)
+    str += String.fromCharCode(data[i]);
+
+  return btoa(str).split(/(.{75})/).join("\n").replace(/\n+/g, "\n").trim();
 }
 
 function _onUrlEntry() {
