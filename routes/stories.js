@@ -4,7 +4,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('stories', { title: 'Stories' });
+    res.render('stories',
+        { title: 'Stories',
+          stories: [
+              {name: 'Curses',     path: './curses'},
+              {name: 'The Troll Room',      path: './troll'},
+              {name: 'A Tight Spot', path: './atightspot'},
+              {name: 'Anchorhead',     path: './anchor'}
+          ]});
 });
 
 router.get('/curses', function(req, res, next) {

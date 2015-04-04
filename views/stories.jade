@@ -4,7 +4,6 @@ block content
     p Welcome to #{title}
 
     ul
-        li
-            a(href="./curses") Curses
-        li
-            a(href="./troll") Troll
+        each story in stories
+            li
+                a(href=story.path) #{story.name}
